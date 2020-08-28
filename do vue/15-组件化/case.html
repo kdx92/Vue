@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <cpn :number1="num1" :number2="num2"></cpn>
+    <!-- <cpn :number1="num1" :number2="num2"/> -->
+    <!-- 可以这么写 -->
+    
+  </div>
+  <template id="cpn">
+    <div>
+      <h2>props: {{ number1 }}</h2>
+      <h2>data: {{ dnumber1 }}</h2>
+      <input type="text" v-model="dnumber1">
+      <h2>props: {{ number2 }}</h2>
+      <h2>data: {{ dnumber2 }}</h2>
+      <input type="text" v-model="number2">
+    <!-- 通过v-model进行双向绑定 -->
+    </div>
+  </template>
+  <script src="../js/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        num1: 1,
+        num2: 0
+      },
+      components: {
+        cpn: {
+          template: '#cpn',
+          props: {
+            number1: Number,
+            number2: Number
+          },
+          // 解决方法
+          data() {
+            return {
+              dnumber1: this.number1,
+              dnumber2: this.number2
+            }
+            // 根据props中的数据初始化data中的数据
+            // 最后会和data中的数据双向绑定
+          }
+          // props的作用是父组件向子组件传数据，所以最好通过父组件改props中的数据
+          // 所以通过input改变值，Vue并不推荐
+          // 所以双向绑定不要用props中的数据
+        }
+        // cpn组件名称，标签
+      }
+    })
+  </script>
+</body>
+
+</html>
