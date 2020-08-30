@@ -9,7 +9,9 @@
 
 <body>
   <div id="app">
-    <cpn :number1="num1" :number2="num2"></cpn>
+    <cpn :number1="num1" :number2="num2"
+    @num1change="num1change"
+    @num2change="num2change"></cpn>
     <!-- <cpn :number1="num1" :number2="num2"/> -->
     <!-- 可以这么写 -->
     
@@ -18,10 +20,15 @@
     <div>
       <h2>props: {{ number1 }}</h2>
       <h2>data: {{ dnumber1 }}</h2>
-      <input type="text" v-model="dnumber1">
+      <!-- <input type="text" v-model="dnumber1"> -->
+      <!-- <input type="text" v-bind:value="dnumber1" @input="dnumber1=$event.target.value"> -->
+      <!-- 这种写法太复杂，可以化简为这样，num1Input是一个函数 -->
+      <!-- v-bind语法糖：: -->
+      <input type="text" :value="dnumber1" @input="num1Input">
       <h2>props: {{ number2 }}</h2>
       <h2>data: {{ dnumber2 }}</h2>
-      <input type="text" v-model="number2">
+      <!-- <input type="text" v-model="number2"> -->
+      <input type="text" :value="dnumber2" @input="num2Input">
     <!-- 通过v-model进行双向绑定 -->
     </div>
   </template>
@@ -32,6 +39,17 @@
       data: {
         num1: 1,
         num2: 0
+      },
+      methods: {
+        num1change(value) {
+          this.num1 = parseInt(value) 
+          // value传来的时候默认是string
+        },
+        num2change(value) {
+          // this.num2 = Number(value)
+          // 导致最前输入的0在props中不显示
+          this.num2 = parseInt(value)
+        }
       },
       components: {
         cpn: {
@@ -48,6 +66,29 @@
             }
             // 根据props中的数据初始化data中的数据
             // 最后会和data中的数据双向绑定
+          },
+          methods: {
+            num1Input(event) {
+              // 第二个date是第一个date的100倍
+              // 1.将input中的value赋值到dnumber1中
+              this.dnumber1 = event.target.value;
+              // 2.为了让父组件可以修改值，发出一个事件
+              this.$emit('num1change', this.dnumber1)
+              // 每次发生改变，都会把dnumber1传出去
+
+              // 3.同时修饰dnumber2的值
+              this.dnumber2 = this.dnumber1 * 100;
+              // 只能修改第二个中的data
+              this.$emit('num2change', this.dnumber2);
+              // 第二个props中的值改变
+            },
+            num2Input(event) {
+              this.dnumber2 = event.target.value;
+              this.$emit('num2change', this.dnumber2)
+              // 第一个date是第二个date的1/100
+              this.dnumber1 = this.dnumber2 / 100;
+              this.$emit('num1change', this.dnumber1);
+            }
           }
           // props的作用是父组件向子组件传数据，所以最好通过父组件改props中的数据
           // 所以通过input改变值，Vue并不推荐
