@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <cpn :number1="num1"
+         :number2="num2"
+         @num1change="num1change"
+         @num2change="num2change"/>
+  </div>
+
+  <template>
+    <div>
+      <h2>props: {{ number1 }}</h2>
+      <h2>data: {{ dnumber1 }}</h2>
+      <input type="text" v-model="dnumber1">
+      <h2>props: {{ number2 }}</h2>
+      <h2>data: {{dnumber2 }}</h2>
+      <input type="text" v-model="dnumber2">
+    </div>
+  </template>
+  <script src="../js/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        num1: 1,
+        num2: 0
+      },
+      methods: {
+        num1change(value) {
+          this.num1 = parseFloat(value)
+        },
+        num2change(value) {
+          this.num2 = parseFloat(value)
+        }
+      },
+      components: {
+        cpn: {
+          template: '#cpn',
+          props: {
+            number1: Number,
+            number2: Number
+          },
+          data() {
+            return{
+              dnumber1: this.number1,
+              dnumber2: this.number2
+            }
+          },
+          watch: {
+            // watch：监听某个属性的改变，对应的是一个对象类型
+            // 要监听哪个属性的改变就写哪个属性的名称
+            // input和v-bind是v-model的实现原理
+            dnumber1(newValue) {
+              this.dnumber1 = newValue * 100;
+              this.$emit('num1change', newValue);
+            },
+            dnumber2(newValue) {
+              this.dnumber1 = newValue / 100;
+              this.$emit('num2change', newValue);
+            }
+            
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
