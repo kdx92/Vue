@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <cpn>
+
+    </cpn>
+  </div>
+  <template id="cpn">
+    <div>
+      <h2>我是子组件</h2>
+      <button @click=“btnClick”>按钮</button>
+      <!-- 在子组件中进行监听 -->
+    </div>
+  </template>
+  <script src="../js/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        message: ''
+      },
+      components: {
+        cpn: {
+          template: '#cpn',
+          methods: {
+            btnClick() {
+              // 1.访问父组件$parent
+              console.log(this.$parent);
+            }
+          }
+          
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

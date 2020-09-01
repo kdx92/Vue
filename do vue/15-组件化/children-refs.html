@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <cpn></cpn>
+    <cpn></cpn>
+    <cpn ref="aaa"></cpn>
+    <!-- 这里不能用<cpn/> ，不然按钮无法显示-->
+    <!-- 由几个<cpn></cpn>，就会产生几个Vue组件-->
+    <button @click="btnClick">按钮</button>
+  </div>
+  <template id="cpn">
+    <div>
+      我是子组件
+    </div>
+  </template>
+  <script src="../js/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        message: ''
+      },
+      methods: {
+        btnClick() {
+          // // 访问子组件中的属性
+          // console.log(this.$children);
+          // // 这里面是VueComponent——即Vue组件
+          // this.$children[0].showMessage()
+          // // 显示showMessage
+          // this.$children[0].name;
+          // // [0]表示是第几个子组件，即上面的<cpn></cpn>
+          // for (let c of this.$children) {
+          //   console.log(c.name);
+          //   c.showMessage();
+          // }
+          // console.log(this.$refs);
+          // console.log(this.$refs.aaa);
+          // $refs解决了在$children使用数组的形式拿到子组件的时候出现子组件顺序发生变化，而不能即使改变的情况
+          // 所以在开发中，$refs用到的非常多
+          // $children在拿到所有子组件的时候使用
+          // $refs——对象类型
+          console.log(this.$refs.aaa.name);
+          // 单独使用是空对象
+        }
+      },
+      components: {
+        cpn: {
+          template: '#cpn',
+          data() {
+            return {
+              name: '我是子组件的name'
+            }
+          },
+          methods: {
+            showMessage() {
+              console.log('showMessage');
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
