@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">{{ message }}</div>
+  <script src="../js/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        message: ''
+      }
+    })
+  </script>
+  <script src="a.js" type="module"></script>
+  <!-- 加上type="module"，不会有命名冲突，模块化的开发思想，另一个模块不能用其他模块中的数据 -->
+  <script src="b.js" type="module"></script>
+  <script src="m.js" type="module"></script>
+</body>
+
+</html>
