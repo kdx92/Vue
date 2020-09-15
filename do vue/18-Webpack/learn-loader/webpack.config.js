@@ -30,7 +30,32 @@ module.exports = {
         // css-loader只负责将css文件进行加载
         // style-loader负责将样式添加到DOM中
         // webpack在读取多个loader时，是从右向左读的
+      },
+      {
+        test: /\.less$/,
+        use: [{
+            loader: "style-loader" // creates style nodes from JS strings
+        }, {
+            loader: "css-loader" // translates CSS into CommonJS
+        }, {
+            loader: "less-loader" // compiles Less to CSS
+        }]
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 900000
+              // 文件以kb为单位乘以1024，大于那个图片文件进行测试
+              // 不要加,
+              // 当加载的图片，小于limit时，会将图片编译成base64字符串形式 并用url-loader
+            }
+          }
+        ]
       }
     ]
+  
   }
 }

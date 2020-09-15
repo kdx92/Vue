@@ -14,3 +14,7 @@ console.log(age);
 // const require('./css/normal.css')
 // css与js不同，不需要里面的变量，所以只需要写依赖
 require('./css/normal.css')
+
+// 依赖less文件
+require('./css/special.less')
+document.writeln('<p>fine</p>')
