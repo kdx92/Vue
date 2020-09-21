@@ -41,19 +41,30 @@ module.exports = {
             loader: "less-loader" // compiles Less to CSS
         }]
       },
+      // {
+      //   test: /\.(png|jpg|gif)$/,
+      //   use: [
+      //     {
+      //       loader: 'url-loader',
+      //       options: {
+      //         limit: 900000
+      //         // 文件以kb为单位乘以1024，大于那个图片文件进行测试
+      //         // 不要加,
+      //         // 当加载的图片，小于limit时，会将图片编译成base64字符串形式 并用url-loader
+      //       }
+      //     }
+      //   ]
+      // },
       {
-        test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 900000
-              // 文件以kb为单位乘以1024，大于那个图片文件进行测试
-              // 不要加,
-              // 当加载的图片，小于limit时，会将图片编译成base64字符串形式 并用url-loader
-            }
-          }
-        ]
+        test: /\.js$/,
+        // 排除以下文件，在将ES6转换为ES5时，只转换src中的文佳，其他的因为不会被打包，所以不再转换
+      exclude: /(node_modules|bower_components)/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['es2015']
+        }
+       }
       }
     ]
   

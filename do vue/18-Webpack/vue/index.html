@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h2>{{ message }}</h2>
+  </div>
+  
+  <!-- 化简在终端进行文件打包的过程，直接输入Webpack可以实现 -->
+  
+  <!-- 这里使用了CommonJS模块化的方法，所以，不能直接引用main.js文件，要使用webpack打包后的文件 -->
+  <!-- 只需要打包一个文件，因为webpack会自动处理文件之间的关系，所以那个依赖关系被自动处理了 -->
+  <script src="./dist/bundle.js"></script>
+</body>
+</html>
