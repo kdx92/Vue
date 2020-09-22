@@ -659,10 +659,14 @@ var _vue = __webpack_require__(6);
 
 var _vue2 = _interopRequireDefault(_vue);
 
+var _app = __webpack_require__(9);
+
+var _app2 = _interopRequireDefault(_app);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // 使用CommonJS的模块化规范
-var _require = __webpack_require__(9),
+var _require = __webpack_require__(10),
     add = _require.add,
     mul = _require.mul;
 
@@ -678,18 +682,38 @@ console.log(_info.age);
 // 3.依赖css文件
 // const require('./css/normal.css')
 // css与js不同，不需要里面的变量，所以只需要写依赖
-__webpack_require__(10);
+__webpack_require__(11);
 
 // 依赖less文件
-__webpack_require__(12);
+__webpack_require__(13);
 document.writeln('<p>fine</p>');
 
 // 5.使用Vue进行开发
 
-var app = new _vue2.default({
+// default不需要{}
+// const App = {
+//   template: `
+//   <div>
+//     <h2> {{ message }} </h2>
+//     <button @click="btnClick">按钮</button>
+//   </div>
+//   `,
+//   data() {
+//     return {
+//       message: 'Vue'
+//     }
+//   },
+//   methods: {
+//     btnClick() {
+
+//     }
+//   }
+// }
+new _vue2.default({
   el: '#app',
-  data: {
-    message: 'Hello Vue'
+  template: '<App/>',
+  components: {
+    App: _app2.default
   }
 });
 
@@ -12979,6 +13003,29 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
+  template: '\n  <div>\n    <h2> {{ message }} </h2>\n    <button @click="btnClick">\u6309\u94AE</button>\n  </div>\n  ',
+  data: function data() {
+    return {
+      message: 'Vue'
+    };
+  },
+
+  methods: {
+    btnClick: function btnClick() {}
+  }
+};
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 function add(num1, num2) {
   return num1 + num2;
 }
@@ -12993,11 +13040,11 @@ module.exports = {
 };
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var api = __webpack_require__(2);
-            var content = __webpack_require__(11);
+            var content = __webpack_require__(12);
 
             content = content.__esModule ? content.default : content;
 
@@ -13017,7 +13064,7 @@ var update = api(content, options);
 module.exports = content.locals || {};
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -13027,11 +13074,11 @@ exports.push([module.i, "body{\r\n  background-color: aliceblue;\r\n  /* backgro
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var api = __webpack_require__(2);
-            var content = __webpack_require__(13);
+            var content = __webpack_require__(14);
 
             content = content.__esModule ? content.default : content;
 
@@ -13051,7 +13098,7 @@ var update = api(content, options);
 module.exports = content.locals || {};
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);

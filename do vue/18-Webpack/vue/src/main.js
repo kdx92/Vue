@@ -21,9 +21,31 @@ document.writeln('<p>fine</p>')
 
 // 5.使用Vue进行开发
 import Vue from 'vue'
-const app = new Vue({
+// import App from './vue/app'
+import App from './vue/App.vue'
+// default不需要{}
+// const App = {
+//   template: `
+//   <div>
+//     <h2> {{ message }} </h2>
+//     <button @click="btnClick">按钮</button>
+//   </div>
+//   `,
+//   data() {
+//     return {
+//       message: 'Vue'
+//     }
+//   },
+//   methods: {
+//     btnClick() {
+
+//     }
+//   }
+// }
+new Vue({
   el: '#app',
-  data: {
-    message: 'Hello Vue'
+  template: `<App/>`,
+  components: {
+    App
   }
 })
