@@ -1,6 +1,8 @@
 // 专用来写Webpack的相关配置，名字固定
 const path = require('path')
 const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin')
 // 引用一个包，其中是path
 // 一旦需要在项目中使用node先关的东西，首先使用npm init
 module.exports = {
@@ -14,6 +16,7 @@ module.exports = {
     // path:path.resolve(__dirname, 'dist'),这是一个绝对路径
     
     filename: 'bundle.js'
+    // publicPath: 'dist/'
   },
   module: {
     rules: [
@@ -81,6 +84,14 @@ module.exports = {
     }
   },
   plugins: [
-    new webpack.BannerPlugin('最终版权归K所有')
-  ]
+    new webpack.BannerPlugin('最终版权归K所有'),
+    new HtmlWebpackPlugin({
+      template: 'index.html'
+    }),
+    new UglifyjsWebpackPlugin()
+  ],
+  devServer: {
+    contentBase: './dist',
+    inline: true
+  }
 }
