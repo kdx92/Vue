@@ -6,8 +6,12 @@ import VueRouter from 'vue-router'
 // import user from '../components/user'
 
 const index = () => import('../components/index')
+const news = () => import ('../components/news')
+const message = () => import('../components/message')
 const about = () => import('../components/about')
 const user = () => import('../components/user')
+const profile = () => import('../components/profile')
+
 
 
 Vue.use(VueRouter)
@@ -21,9 +25,22 @@ const routes = [
   },
   {
     path: '/index',
-    component: index
+    component: index,
     // component: () => import('../components/index')
-
+    children: [
+      {
+        path: '',
+        redirect: 'news'
+      },
+      {
+        path: 'news',
+        component: news
+      },
+      {
+        path: 'message',
+        component: message
+      }
+    ]
   },
   {
     path: '/about',
@@ -32,6 +49,10 @@ const routes = [
   {
     path: '/user/:userId',
     component: user
+  },
+  {
+    path: '/profile',
+    component: profile
   }
 ]
 // export default new Router({
