@@ -9,7 +9,11 @@
 
 <script>
   export default {
-    name: "index"
+    name: "index",
+    // created() {
+    //   console.log('created');
+    //   document.title = 'Index'
+    // }
   }
 </script>
 

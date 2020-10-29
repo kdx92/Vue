@@ -26,6 +26,9 @@ const routes = [
   {
     path: '/index',
     component: index,
+    meta: {
+      title: 'Index'
+    },
     // component: () => import('../components/index')
     children: [
       {
@@ -44,11 +47,17 @@ const routes = [
   },
   {
     path: '/about',
-    component: about
+    component: about,
+    meta: {
+      title: 'About'
+    }
   },
   {
     path: '/user/:userId',
-    component: user
+    component: user,
+    meta: {
+      title: 'User'
+    }
   },
   {
     path: '/profile',
@@ -70,4 +79,9 @@ const router = new VueRouter({
   mode: 'history'
 })
 
+router.beforeEach((to, from, next) => {
+  //从from跳转到to
+  document.title = to.matched[0].meta.title
+  next()
+})
 export default router

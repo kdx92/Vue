@@ -4,7 +4,11 @@
 
 <script>
   export default {
-    name: "about"
+    name: "about",
+    // created() {
+    //   console.log('created');
+    //   document.title = 'About'
+    // }
   }
 </script>
 

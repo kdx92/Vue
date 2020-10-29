@@ -15,7 +15,11 @@
         return this.$route.params.userId
         //哪个路由处于活跃状态，就是指哪个
       }
-    }
+    },
+    // created() {
+    //   console.log('created');
+    //   document.title = 'User'
+    // }
   }
 </script>
 
