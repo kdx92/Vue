@@ -12,7 +12,10 @@
     <router-link :to="{path: '/profile',query: {name: 'why', age: 18, height: 1.8}}">profile</router-link> -->
     <button @click="userClick">用户</button>
     <button @click="profileClick">profile</button>
-    <router-view></router-view>
+    <!-- <router-view></router-view> -->
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
   </div>
 </template>
 

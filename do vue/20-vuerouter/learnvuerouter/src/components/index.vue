@@ -14,6 +14,20 @@
     //   console.log('created');
     //   document.title = 'Index'
     // }
+    data() {
+      return {
+        path: '/index/news'
+      }
+    },
+    activated() {
+      this.$router.push(this.path);
+      // console.log(this.path);
+    },
+    beforeRouteLeave (to, from, next) {
+      console.log(this.$route.path);
+      this.path = this.$route.path;
+      next()
+    }
   }
 </script>
 
