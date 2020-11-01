@@ -1,30 +1,12 @@
 
 <template>
-  <!-- <div id="tab-bar-item">
-
-
-
-    <div id="tab-bar">
-      <div class="tab-bar-item">
-        <img src="../../assets/img/tabbar/home.svg" alt="">
-        首页</div>
-      <div class="tab-bar-item">
-        <img src="../../assets/img/tabbar/home.svg" alt="">
-        分类</div>
-      <div class="tab-bar-item">
-        <img src="../../assets/img/tabbar/home.svg" alt="">
-        购物车</div>
-      <div class="tab-bar-item">
-        <img src="../../assets/img/tabbar/home.svg" alt="">
-        我的</div>
-    </div> -->
-
-
+   
     
+  <div class="tab-bar-item" @click="itemClick">
+    <div v-if="!isActive"><slot name="item-icon"></slot></div>
+    <div v-else><slot name="item-icon-active"></slot></div>
+    <div :style="activeStyle"><slot name="item-text"></slot></div>
     
-  <div class="tab-bar-item">
-    <slot name="item-icon"></slot>
-    <slot name="item-text"></slot>
     
   </div>
 
@@ -32,7 +14,32 @@
 
 <script>
   export default {
-  name: 'TabBarItem'
+  name: 'TabBarItem',
+  props: {
+    path: String,
+    activeColor: {
+      type: String,
+      default: 'red'
+    }
+  },
+  data() {
+    return {
+      // isActive: true
+    }
+  },
+  computed: {
+    isActive() {
+      return this.$route.path.indexOf(this.path) !== -1
+    },
+    activeStyle() {
+      return this.isActive ? {color: this.activeColor} : {}
+    }
+  },
+  methods: {
+    itemClick() {
+      this.$router.replace(this.path)
+    }
+  }
 }
 </script>
 
@@ -51,5 +58,7 @@
     vertical-align: middle;
     margin-bottom: 2px;
   }
-
+  /* .active {
+    color: red;
+  } */
 </style>
