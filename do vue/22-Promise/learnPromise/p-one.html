@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+
+<script>
+  // 异步操作
+  // setTimeout(() => {
+  //   console.log('Hello World');
+  // }, 1000)
+  // 可以对异步操作进行封装——Promise类
+
+  // Promise中要求传入的参数是一个函数
+  // 这个函数要求传入两个参数，resolve和reject
+  // resolve和reject本身也是函数
+  // 直接将异步操作放这里
+  
+  // new Promise((resolve, reject) => {
+  //   setTimeout(() => {
+  //     console.log('Hello World');
+  //   }, 1000)
+  // })
+
+// 延迟1s打印hello world，再延迟1s打印hello vue.js，再延迟1s打印hello react
+// 对函数进行抽离
+// 在使用resolve()后，调用then()函数，then()函数要求参数也是一个函数
+// 把要操作的代码放then()中
+// 多次的异步操作，可以在Promise中再次调用Promise类
+
+// 链式编程
+  // new Promise((resolve, reject) => {
+  //   // 第一次网络请求的代码
+  //   setTimeout(() => {
+  //     resolve()
+      
+  //   }, 1000)
+  // }).then(() => {
+  //   // 第一次处理的代码
+  //   console.log('Hello World');
+  //   console.log('Hello World');
+  //   console.log('Hello World');
+  //   console.log('Hello World');
+  //   console.log('Hello World');
+  //   console.log('Hello World');
+
+  //   return new Promise((resolve, reject) => {
+  //     // 第二次网络请求的代码
+  //     setTimeout(() => {
+  //       resolve()     
+  //     }, 1000)
+  //   })
+  // }).then(() => {
+  //   // 第二次处理的代码
+  //   console.log('Hello Vue');
+  //   console.log('Hello Vue');
+  //   console.log('Hello Vue');
+  //   console.log('Hello Vue');
+  //   console.log('Hello Vue');
+  //   console.log('Hello Vue');
+
+  //   return new Promise((resolve, reject) => {
+  //     // 第三次网络请求的代码
+  //     setTimeout(() => {
+  //       resolve()     
+  //     }, 1000)
+  //   })
+  // }).then(() => {
+  //   // 第三次处理的代码
+  //   console.log('Hello Evan');
+  //   console.log('Hello Evan');
+  //   console.log('Hello Evan');
+  //   console.log('Hello Evan');
+  //   console.log('Hello Evan');
+  //   console.log('Hello Evan');
+
+  // })
+  
+
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('Hello')
+    }, 1000)
+  }).then((data) => {
+    console.log(data);
+
+  })
+
+
+
+</script>
+</html>
