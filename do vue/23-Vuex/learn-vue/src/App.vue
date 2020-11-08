@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <button @click="updateInfo">修改信息</button>
+    <h2>{{ $store.state.info}}</h2>
+
     <h2>{{ message }}</h2>
     <h2>{{ $store.state.counter }}</h2>
     <h2>{{ $store.getters.powerCounter }}</h2>
@@ -10,6 +13,9 @@
     <h2>{{ $store.getters.moreAge(12) }}</h2>
     <button @click="addition">+</button>
     <button @click="subtraction">-</button>
+    <button @click="addCount(5)">+5</button>
+    <button @click="addCount(10)">+10</button>
+    <button @click="addStudent">添加学生</button>
 
     <!-- <hello-vue :counter="counter"/> -->
     <hello-vue/>
@@ -49,6 +55,32 @@ export default {
     },
     subtraction() {
       this.$store.commit('decrement')
+    },
+    addCount(count) {
+
+      // payload：负载
+      // 1.普通的提交封装
+      // this.$store.commit('incrementCount', count)
+      // 2.特殊的提交封装
+      // mutations中的内容分为两部分，一部分是事件类型，即type
+
+      // 1与2传过去的count是不同的，1传过去的count是一个数字
+      // 2传过去的count是一个对象
+      this.$store.commit({
+        type: 'incrementCount',
+        // count: count
+
+        // ES6
+        count
+
+      })
+    },
+    addStudent() {
+      const stu = {id: 4, name: 'e', age: 30}
+      this.$store.commit('addStudent', stu)
+    },
+    updateInfo() {
+      this.$store.commit('updateInfo')
     }
   }
 }
