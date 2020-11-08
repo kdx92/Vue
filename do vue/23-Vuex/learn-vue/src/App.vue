@@ -25,6 +25,9 @@
 <script>
 import HelloVue from './components/HelloVue'
 
+import {
+  INCREMENT
+} from './store/mutations-types'
 export default {
   name: 'App',
   components: {
@@ -51,7 +54,7 @@ export default {
   // },
   methods: {
     addition() {
-      this.$store.commit('increment')
+      this.$store.commit(INCREMENT)
     },
     subtraction() {
       this.$store.commit('decrement')
@@ -79,8 +82,43 @@ export default {
       const stu = {id: 4, name: 'e', age: 30}
       this.$store.commit('addStudent', stu)
     },
-    updateInfo() {
-      this.$store.commit('updateInfo')
+    // updateInfo() {
+    //   // this.$store.commit('updateInfo')
+    //   this.$store.dispatch('aUpdateInfo', 'payload')
+    //   // 为了模拟异步操作
+    //   // actions——dispatch
+    // }
+
+    // updateInfo() {
+      
+    //   this.$store.dispatch('aUpdateInfo', () => {
+    //     console.log('OVER');
+    //     // 当commit后，打印，表示完成
+    //   })
+      
+    // }
+    
+    // updateInfo() {
+      
+    //   this.$store.dispatch('aUpdateInfo', {
+    //     message: 'WithMessage',
+    //     success: () => {
+    //       console.log('OVER');
+    //     }
+    //   })
+      
+    // }
+
+
+        updateInfo() {
+      
+      this.$store
+      .dispatch('aUpdateInfo', 'WithMessage')
+      .then(res => {
+        console.log('success');
+        console.log(res);
+      })
+      
     }
   }
 }
