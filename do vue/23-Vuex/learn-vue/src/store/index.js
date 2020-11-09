@@ -11,6 +11,38 @@ Vue.use(Vuex)
 
 
 // 2.创建对象
+
+const moduleA = {
+  state: {
+    name: 'zhangsan'
+  },
+  mutations: {
+    updateName(state, payload) {
+      state.name = payload
+    }
+  },
+  actions: {
+    aUpdateName(context) {
+      setTimeout(() => {
+        context.commit('updateName', 'wangwu')
+      }, 1000)
+      
+    }
+  },
+  getters: {
+    fullname(state) {
+      return state.name + '11111'
+    },
+    fullname2(state, getters) {
+      return getters.fullname + '222222'
+    },
+    fullname3(state, getters, rootState) {
+      return getters.fullname2 + rootState.counter
+    },
+    // rootState就是下面的那个counter
+
+  }
+}
 const store = new Vuex.Store({
   state: {
     // 都会被加到响应式系统中
@@ -138,7 +170,8 @@ const store = new Vuex.Store({
 
   },
   modules: {
-
+    // 在这里继续定义模块
+    a: moduleA
   }
 })
 

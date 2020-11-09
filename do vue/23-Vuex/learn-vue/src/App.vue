@@ -1,5 +1,12 @@
 <template>
   <div id="app">
+    <h2>{{ $store.state.a.name}}</h2>
+    <button @click="updateName">修改名字</button>
+    <h2>{{ $store.getters.fullname }}</h2>
+    <h2>{{ $store.getters.fullname2 }}</h2>
+    <h2>{{ $store.getters.fullname3 }}</h2>
+    <button @click="asyncUpdateName">异步修改名字</button>
+
     <button @click="updateInfo">修改信息</button>
     <h2>{{ $store.state.info}}</h2>
 
@@ -119,6 +126,12 @@ export default {
         console.log(res);
       })
       
+    },
+    updateName() {
+      this.$store.commit('updateName', 'lisi')
+    },
+    asyncUpdateName() {
+      this.$store.dispatch('aUpdateName')
     }
   }
 }
