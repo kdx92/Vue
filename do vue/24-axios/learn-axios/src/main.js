@@ -22,11 +22,15 @@ new Vue({
 //   console.log(res);
 // })
 
+
 // 2.axios发送并发请求
+axios.defaults.baseURL ='http://123.207.32.32:8000'
+axios.defaults.timeout = 5000
+
 axios.all([axios({
-  url: 'http://123.207.32.32:8000/home/multidata'
+  url: '/home/multidata'
 }), axios({
-  url: 'http://123.207.32.32:8000/home/data',
+  url: '/home/data',
   params: {
     type: 'sell',
     page: 5
